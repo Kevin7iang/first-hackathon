@@ -1,4 +1,7 @@
 var map = L.map('map').locate({setView: false, maxZoom: 15})/*;setView([37.783688, -122.4091485], 15);*/
+
+var markers = new Firebase('https://localactivities.firebaseIO.com');
+
 var storage = [];
 L.tileLayer('http://{s}.tiles.mapbox.com/v3/kevin1liang.inaoeoj4/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -10,16 +13,27 @@ $('#getLocation').on('click', function(){
   L.marker([37.783688, -122.4091485]).addTo(map).bindPopup('Hack Reactor');
 });
 
+markers.on('child_added', function(snapshot){
+  var addMarker = snapshot.val();
+  L.marker([addMarker.latitude, addMarker.longitude], {title: addMarker.title}).addTo(map).bindPopup(addMarker.title);
+});
+
 map.on('click', function(e) {
   var activity = prompt("Please enter activity type:");
   var marker = L.marker([e.latlng.lat, e.latlng.lng], {title: activity});
   marker.addTo(map).bindPopup(activity);
   storage.push(marker);
-  console.log(marker.options.title);
-  console.log(typeof(marker.options.title));
+  //adding marker data to firebase
+  markers.push({
+    latitude: e.latlng.lat,
+    longitude: e.latlng.lng,
+    title: activity
+  });
+  // console.log(marker.options.title);
+  // console.log(typeof(marker.options.title));
   // L.marker.title = prompt('Enter an activity:');
-  console.log("Latitude: " + e.latlng.lat + ", Longitude: " + e.latlng.lng + ", Title: " + activity);
-  console.log(storage);
+  // console.log("Latitude: " + e.latlng.lat + ", Longitude: " + e.latlng.lng + ", Title: " + activity);
+  // console.log(storage);
   // console.log(storage.length);
   // for(i=0; i<storage.length; i++) {
   //   if 
@@ -75,7 +89,6 @@ $('#hockey').on('click', function(){
     }
   }
 });
-
 
 
 //MapID: kevin1liang.inaoeoj4
