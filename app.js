@@ -5,11 +5,8 @@ L.tileLayer('http://{s}.tiles.mapbox.com/v3/kevin1liang.inaoeoj4/{z}/{x}/{y}.png
     maxZoom: 18
 }).addTo(map);
 
-$('.getLocation').on('click', function(){
+$('#getLocation').on('click', function(){
   map.locate({setView: true, maxZoom: 15});
-});
-
-$('.setMarker').on('click', function(){
   L.marker([37.783688, -122.4091485]).addTo(map).bindPopup('Hack Reactor');
 });
 
@@ -35,3 +32,6 @@ map.on('click', function(e) {
 //     // create a marker at the users "latlng" and add it to the map
 //     L.marker(e.latlng).addTo(mymap);
 // }
+
+ 
+//if !activity then opacity = 0
