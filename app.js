@@ -13,13 +13,70 @@ $('#getLocation').on('click', function(){
 map.on('click', function(e) {
   var activity = prompt("Please enter activity type:");
   var marker = L.marker([e.latlng.lat, e.latlng.lng], {title: activity});
-  marker.addTo(map);
+  marker.addTo(map).bindPopup(activity);
   storage.push(marker);
   console.log(marker.options.title);
+  console.log(typeof(marker.options.title));
   // L.marker.title = prompt('Enter an activity:');
   console.log("Latitude: " + e.latlng.lat + ", Longitude: " + e.latlng.lng + ", Title: " + activity);
   console.log(storage);
+  // console.log(storage.length);
+  // for(i=0; i<storage.length; i++) {
+  //   if 
+  // }
 });
+
+$('#soccer').on('click', function(){
+  for (i=0; i<storage.length;i++){
+    if (storage[i].options.title === 'soccer')
+      storage[i].setOpacity(1.0);
+    else{
+      storage[i].setOpacity(0.2);
+    }
+  }
+});
+
+$('#hiking').on('click', function(){
+  for (i=0; i<storage.length;i++){
+    if (storage[i].options.title === 'hiking')
+      storage[i].setOpacity(1.0);
+    else{
+      storage[i].setOpacity(0.2);
+    }
+  }
+});
+
+$('#baseball').on('click', function(){
+  for (i=0; i<storage.length;i++){
+    if (storage[i].options.title === 'baseball')
+      storage[i].setOpacity(1.0);
+    else{
+      storage[i].setOpacity(0.2);
+    }
+  }
+});
+
+$('#basketball').on('click', function(){
+  for (i=0; i<storage.length;i++){
+    if (storage[i].options.title === 'basketball')
+      storage[i].setOpacity(1.0);
+    else{
+      storage[i].setOpacity(0.2);
+    }
+  }
+});
+
+$('#hockey').on('click', function(){
+  for (i=0; i<storage.length;i++){
+    if (storage[i].options.title === 'hockey')
+      storage[i].setOpacity(1.0);
+    else{
+      storage[i].setOpacity(0.2);
+    }
+  }
+});
+
+
 
 //MapID: kevin1liang.inaoeoj4
  
