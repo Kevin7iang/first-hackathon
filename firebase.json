@@ -1,0 +1,9 @@
+{
+  "firebase": "localactivities",
+  "public": "/Users/kevinliang/code/first-hackathon",
+  "ignore": [
+    "firebase.json",
+    ".*",
+    "**/node_modules/**"
+  ]
+}

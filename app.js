@@ -41,13 +41,14 @@ map.on('click', function(e) {
 });
 
 $('#soccer').on('click', function(){
-  for (i=0; i<storage.length;i++){
-    if (storage[i].options.title === 'soccer')
-      storage[i].setOpacity(1.0);
-    else{
-      storage[i].setOpacity(0.2);
+  markers.on('child_added', function(snapshot){
+    var addMarker = snapshot.val();
+    marker = L.marker([addMarker.latitude, addMarker.longitude], {title: addMarker.title});
+    // marker.addTo(map).bindPopup(addMarker.title);
+    if (marker.options.title !== 'soccer'){
+      marker.setOpacity(0.2);
     }
-  }
+  });
 });
 
 $('#hiking').on('click', function(){
